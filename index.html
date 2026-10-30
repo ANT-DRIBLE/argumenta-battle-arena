@@ -1,1 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101329">
 
+    <title>ARGUMENTA | Battle Arena</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<header class="topbar">
+    <div class="logo">ARGUMENTA<span>®</span></div>
+    <div class="season">SEASON 01 · BATTLE ARENA</div>
+    <div class="online">
+        <span class="dot"></span> MULTIPLAYER
+    </div>
+</header>
+
+<main>
+
+    <section id="home" class="screen active">
+
+        <div class="hero">
+            <div class="tag">O CAMPO DE BATALHA DAS IDEIAS</div>
+
+            <h1>
+                ARGUMENTA
+                <span>BATTLE ARENA</span>
+            </h1>
+
+            <p>
+                Sua inteligência é sua maior arma.
+                Vença seus adversários com argumentos!
+            </p>
+
+            <div class="player-input">
+                <label>SEU NOME DE GUERRA</label>
+                <input
+                    id="playerName"
+                    maxlength="16"
+                    placeholder="Digite seu nickname"
+                >
+            </div>
+
+            <div class="menu-buttons">
+                <button class="primary" onclick="createRoom()">
+                    ⚔ CRIAR PARTIDA
+                </button>
+
+                <button class="secondary" onclick="showJoin()">
+                    ENTRAR EM UMA SALA
+                </button>
+            </div>
+
+            <div id="joinBox" class="join-box hidden">
+                <input
+                    id="roomCode"
+                    maxlength="6"
+                    placeholder="CÓDIGO DA SALA"
+                >
+                <button class="primary" onclick="joinRoom()">
+                    ENTRAR
+                </button>
+            </div>
+
+            <p id="homeMessage" class="message"></p>
+        </div>
+
+        <div class="features">
+            <div>🎯 DESAFIOS</div>
+            <div>🏆 RANKING</div>
+            <div>🧠 ESTRATÉGIA</div>
+            <div>🌐 ONLINE</div>
+        </div>
+
+    </section>
+
+    <section id="lobby" class="screen">
+
+        <div class="panel">
+            <div class="tag">SALA DE BATALHA</div>
+
+            <h2>AGUARDANDO JOGADORES</h2>
+
+            <div class="room-code">
+                CÓDIGO:
+                <strong id="displayCode">------</strong>
+                <button onclick="copyCode()">COPIAR</button>
+            </div>
+
+            <h3>JOGADORES CONECTADOS</h3>
+
+            <div id="lobbyPlayers" class="players"></div>
+
+            <p id="lobbyMessage" class="message"></p>
+
+            <button id="startButton"
+                class="primary hidden"
+                onclick="startGame()">
+                INICIAR BATALHA
+            </button>
+
+            <button class="secondary" onclick="leaveRoom()">
+                SAIR DA SALA
+            </button>
+        </div>
+
+    </section>
+
+    <section id="game" class="screen">
+
+        <div class="game-header">
+            <div>
+                <div class="tag">BATTLE ROYALE DE ARGUMENTAÇÃO</div>
+                <h2>ARENA DE IDEIAS</h2>
+            </div>
+
+            <div class="round-info">
+                <span>RODADA</span>
+                <strong id="roundNumber">1</strong>
+            </div>
+        </div>
+
+        <div id="leaderboard" class="leaderboard"></div>
+
+        <div class="challenge-card">
+            <div id="challengeType" class="challenge-type">
+                TESE
+            </div>
+
+            <h2 id="challengeTitle">DESAFIO</h2>
+
+            <p id="challengeDescription">
+                Prepare sua argumentação.
+            </p>
+
+            <div id="challengeHint" class="hint"></div>
+        </div>
+
+        <div class="turn-box">
+            <span>VEZ DE:</span>
+            <strong id="currentPlayer">JOGADOR</strong>
+        </div>
+
+        <div class="answer-box">
+            <label>SEU ARGUMENTO</label>
+
+            <textarea
+                id="answer"
+                maxlength="1200"
+                placeholder="Escreva sua resposta para vencer a batalha..."
+            ></textarea>
+
+            <div class="answer-footer">
+                <span id="characterCount">0 / 1200</span>
+                <span>MÍNIMO: 30 CARACTERES</span>
+            </div>
+        </div>
+
+        <button id="submitButton"
+            class="primary"
+            onclick="submitAnswer()">
+            ENVIAR ARGUMENTO ⚡
+        </button>
+
+        <p id="gameMessage" class="message"></p>
+
+        <button class="secondary" onclick="leaveRoom()">
+            ABANDONAR PARTIDA
+        </button>
+
+    </section>
+
+    <section id="results" class="screen">
+
+        <div class="panel results-panel">
+            <div class="tag">BATALHA FINALIZADA</div>
+
+            <h1>🏆 VITÓRIA!</h1>
+
+            <p>O campo de batalha tem um novo campeão.</p>
+
+            <div id="finalRanking"></div>
+
+            <button class="primary" onclick="returnHome()">
+                VOLTAR AO MENU
+            </button>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    ARGUMENTA BATTLE ARENA · EDUCAÇÃO E COMPETITIVIDADE
+</footer>
+
+</body>
+</html>
